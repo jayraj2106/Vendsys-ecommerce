@@ -29,9 +29,8 @@
 /* Inputs */
 .register-container form input {
     width: 100%;
-    padding: 10px;
+    padding: 10px 0;
     margin: 8px 0;
-
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
