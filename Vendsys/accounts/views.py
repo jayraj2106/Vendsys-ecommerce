@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from Vendsys.accounts.forms import RegisterForm
+from .forms import RegisterForm
 
 
 def register_view(request):
@@ -7,9 +7,9 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirect to the login page after successful registration
+            return redirect('login') 
     else:
         form = RegisterForm()
 
     return render(request, 'accounts/register.html', {'form': form})
-# Create your views here.
+
