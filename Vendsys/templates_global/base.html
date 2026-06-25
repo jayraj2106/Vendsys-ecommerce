@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Vendsys{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+
+
+<div class="navbar">
+    <a class="logo">Vendsys</a>
+
+    <div class="nav-links">
+        <a href="/products/">Home</a>
+        <a href="/products/">Products</a>
+        <a href="#">Cart</a>
+        <a href="#">Login</a>
+    </div>
+</div>
+{% block extra_css %}{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

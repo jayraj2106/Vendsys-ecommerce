@@ -1,26 +1,45 @@
-    {% load static %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Products</title>
-        <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
-    </head>
-    <body>
+{% extends 'base.html' %}
+{% load static %}
 
-    <h1>All Products</h1>
+{% block title %}
+Products
+{% endblock %}
 
-    {% if products %}
-    {% for product in products %}
-        <div>
-            <a href="{% url 'product_detail' product.id %}">
-                <img src="{{ product.image.url }}" width="200" height="200" alt="{{ product.name }}">
-            </a>
-            <h2>{{ product.name }}</h2>
-        </div>
-    {% endfor %}
-    {% else %}
-        <p>No products available!!</p>
-    {% endif %}
+{% block content %}
 
-    </body>
-    </html>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/product_list.css' %}">
+{% endblock %}
+
+<h1 class="page-title">All Products</h1>
+
+{% if products %}
+<div class="product-container">
+
+{% for product in products %}
+    <div class="product-card">
+        <a href="{% url 'product_detail' product.id %}" style="text-decoration:none; color:black;">
+
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+            <div class="product-info">
+                <h2 class="product-name">{{ product.name }}</h2>
+
+                <p class="product-price">₹ {{ product.price }}</p>
+
+                <p class="product-desc">
+                    {{ product.description|truncatewords:10 }}
+                </p>
+            </div>
+
+        </a>
+    </div>
+{% endfor %}
+
+</div>
+
+{% else %}
+<p style="text-align:center;">No products available.</p>
+{% endif %}
+
+{% endblock %}
