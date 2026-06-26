@@ -20,8 +20,18 @@ body {
     font-weight: bold;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.welcome-text {
+    color: white;
+    margin-left: 20px;
+    font-size: 16px;
+}
 /* Nav links */
-.nav-links a {
+.nav-links a { 
     color: white;
     margin-left: 20px;
     text-decoration: none;
