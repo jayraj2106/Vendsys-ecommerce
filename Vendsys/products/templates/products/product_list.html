@@ -9,7 +9,7 @@ Products
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/product_list.css' %}">
-{% endblock %}
+{% endblock %} 
 
 <h1 class="page-title">All Products</h1>
 
@@ -25,14 +25,16 @@ Products
             <div class="product-info">
                 <h2 class="product-name">{{ product.name }}</h2>
 
-                <p class="product-price">₹ {{ product.price }}</p>
-
                 <p class="product-desc">
-                    {{ product.description|truncatewords:10 }}
+                    {{ product.description }}
                 </p>
+
+                <p class="product-price">₹ {{ product.price }}</p>
+        </a> 
+                <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart">Add</a>
             </div>
 
-        </a>
+        
     </div>
 {% endfor %}
 

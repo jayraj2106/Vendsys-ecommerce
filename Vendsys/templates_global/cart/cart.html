@@ -1,0 +1,36 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'cart/cart.css' %}">
+<
+{% endblock %}
+{% block content %} 
+{% if cart_items %}
+    <h1 class="page-title">Your Cart</h1>
+    <div class="cart-container">
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                <div class="cart-item-info">
+                    <h2>{{ item.product.name }}</h2>
+                    <p>Price: ₹ {{ item.product.price }}</p>
+                    <div class ="quantity-control">
+                        <a href="{% url 'decrease_quantity' item.product.id %}"><i class="fa-solid fa-minus"></i></a>
+                        <p>{{ item.quantity }}</p>
+                        <a href="{% url 'increase_quantity' item.product.id %}"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                     Total: ₹ {{ item.total_price }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <p class="total-price">Total Cart Value: ₹ {{ total }}</p>
+{% else %}
+    <p style="text-align:center;">Your cart is empty.</p>
+{% endif %}
+{% endblock %}
