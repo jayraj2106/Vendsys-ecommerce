@@ -7,30 +7,96 @@ Cart
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
-<
+
 {% endblock %}
 {% block content %} 
 {% if cart_items %}
     <h1 class="page-title">Your Cart</h1>
     <div class="cart-container">
         {% for item in cart_items %}
-            <div class="cart-item">
+            <div class="cart-item" id="cart-item-{{ item.product.id }}">
                 <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                 <div class="cart-item-info">
                     <h2>{{ item.product.name }}</h2>
                     <p>Price: ₹ {{ item.product.price }}</p>
+
+
                     <div class ="quantity-control">
-                        <a href="{% url 'decrease_quantity' item.product.id %}"><i class="fa-solid fa-minus"></i></a>
-                        <p>{{ item.quantity }}</p>
-                        <a href="{% url 'increase_quantity' item.product.id %}"><i class="fa-solid fa-plus"></i></a>
+                        <button onclick="decreaseQty('{{ item.product.id}}')"><i class="fa-solid fa-minus"></i></button>
+
+                        <span id="qty-{{ item.product.id}}">{{ item.quantity }}</span>
+
+                        <button onclick="increaseQty('{{ item.product.id }}')"><i class="fa-solid fa-plus"></i></button>
+                        
                     </div>
-                     Total: ₹ {{ item.total_price }}
+
+
+                    <p>
+                        Total: ₹ <span id="item-total-{{ item.product.id }}">{{ item.total_price|floatformat:2 }} </span>                
+                    </p>
+
+
+
                 </div>
             </div>
         {% endfor %}
     </div>
-    <p class="total-price">Total Cart Value: ₹ {{ total }}</p>
+
+   <h2 style="text-align:center;">
+    Cart Total: ₹ <span id="cart-total">{{ total|floatformat:2 }}</span>
+   </h2>
 {% else %}
-    <p style="text-align:center;">Your cart is empty.</p>
+    <h2 style="text-align:center;">Your cart is empty.</h2>
 {% endif %}
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+function getCSRFToken() {
+    let cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        let [name, value] = cookie.trim().split('=');
+        if (name === 'csrftoken') return value;
+    }
+}
+
+// Increase
+function increaseQty(productId) {
+    fetch(`/cart/increase/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCSRFToken()
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById(`qty-${productId}`).innerText = data.quantity;
+        document.getElementById(`item-total-${productId}`).innerText = data.item_total;
+        document.getElementById(`cart-total`).innerText = data.cart_total;
+        
+        
+    });
+}
+
+//Decrease
+function decreaseQty(productId) {
+    fetch(`/cart/decrease/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCSRFToken()
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.removed) {
+            document.getElementById(`cart-item-${productId}`).remove();
+        } else {
+            document.getElementById(`qty-${productId}`).innerText = data.quantity;
+            document.getElementById(`item-total-${productId}`).innerText = data.item_total;
+        }
+        document.getElementById(`cart-total`).innerText = data.cart_total;
+    });
+}
+</script>
 {% endblock %}

@@ -31,7 +31,7 @@ Products
 
                 <p class="product-price">₹ {{ product.price }}</p>
         </a> 
-                <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart">Add</a>
+                <button onclick="addToCart('{{ product.id }}')">Add</button>
             </div>
 
         
@@ -43,5 +43,40 @@ Products
 {% else %}
 <p style="text-align:center;">No products available.</p>
 {% endif %}
+
+{% endblock %}
+
+
+
+
+{% block extra_js%} 
+<script>
+function getCSRFToken() {
+    let cookies = document.cookie.split(';');
+
+    for (let cookie of cookies) {
+        let [name, value] = cookie.trim().split('=');
+
+        if (name === 'csrftoken') {
+            return value;
+        }
+    }
+}   
+
+function addToCart(productId) {
+    fetch(`/cart/add_to_cart/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCSRFToken(),
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("cart-count").innerText = data.cart_count;
+    });
+}
+</script>
+
 
 {% endblock %}

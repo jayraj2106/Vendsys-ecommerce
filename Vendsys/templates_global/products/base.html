@@ -15,8 +15,9 @@
     <div class="nav-links">
         <a href="/products/">Home</a>
         <a href="/products/">Products</a>
-        <a href="/cart/">Cart</a>
-        <!-- <a href="/accounts/login/">Login</a> -->
+        <a href="/cart/">Cart
+        <span id="cart-count">{% if cart_count > 0 %}{{ cart_count }}{% endif %}</span>
+        </a>
     {% if user.is_authenticated %}
         <div class="welcome-text">
             <a href="{% url 'profile' %}">Welcome {{ user.username }}</a>
@@ -33,6 +34,11 @@
 {% block content %}
 {% endblock %}
 
+{% block extra_js%}
+<script>
+document.getElementById("cart-count").innerText = "{% if cart_count > 0 %}{{ cart_count }}{% endif %}";
+</script>
+{% endblock %}
 </body>
 
 </html>
