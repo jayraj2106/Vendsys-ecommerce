@@ -6,9 +6,8 @@ from django.http import JsonResponse
 def add_to_cart(request, product_id):
     cart = request.session.get('cart', {})
     
-
     if str(product_id) in cart:
-        cart[str(product_id)]["quantity"] += 1  #increase quantity
+        cart[str(product_id)]["quantity"] += 1 #increase quantity
     else:
         cart[str(product_id)] = {"quantity": 1} #add 
 
@@ -18,7 +17,6 @@ def add_to_cart(request, product_id):
 
     return JsonResponse({
         "success" : True,
-        "message" : "Product added",
         "quantity" : cart[str(product_id)]["quantity"],
         "count" : count,
     })  

@@ -9,7 +9,12 @@ Cart
 <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
 
 {% endblock %}
-{% block content %} 
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <p>{{ message }}</p>
+  {% endfor %}
+{% endif %} 
 {% if cart_items %}
     <h1 class="page-title">Your Cart</h1>
     <div class="cart-container">
@@ -42,13 +47,20 @@ Cart
         {% endfor %}
     </div>
 
-   <h2 style="text-align:center;">
+    <h2 style="text-align:center;">
     Cart Total: ₹ <span id="cart-total">{{ total|floatformat:2 }}</span>
-   </h2>
+    </h2>
+
+    <form action="{% url 'place_order' %}" method="POST" class="place-order">
+    {% csrf_token %}
+    <button type="submit">Order</button>
+    </form>
+
 {% else %}
     <h2 style="text-align:center;">Your cart is empty.</h2>
 {% endif %}
 {% endblock %}
+
 
 
 {% block extra_js %}
