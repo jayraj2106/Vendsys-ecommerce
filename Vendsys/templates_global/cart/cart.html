@@ -9,12 +9,7 @@ Cart
 <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
 
 {% endblock %}
-{% block content %}
-{% if messages %}
-  {% for message in messages %}
-    <p>{{ message }}</p>
-  {% endfor %}
-{% endif %} 
+{% block content %}gi
 {% if cart_items %}
     <h1 class="page-title">Your Cart</h1>
     <div class="cart-container">

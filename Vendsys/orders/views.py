@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from django.contrib import messages
 from .models import Order,OrderItem
 
 def place_order(request):
@@ -9,7 +8,6 @@ def place_order(request):
     cart = request.session.get('cart', {})
 
     if not cart:
-        messages.warning(request, "Your cart is empty")
         return redirect("product_list")
 
     total_price = 0
