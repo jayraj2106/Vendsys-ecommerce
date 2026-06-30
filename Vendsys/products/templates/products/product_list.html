@@ -11,6 +11,22 @@ Products
 <link rel="stylesheet" href="{% static 'products/product_list.css' %}">
 {% endblock %} 
 
+<form method="GET">
+    <select name="category" onchange="this.form.submit()">
+        <option value="">All Categories</option>
+
+        {% for cat in categories %}
+            <option value="{{ cat.id }}"
+                {% if request.GET.category == cat.id|stringformat:'s' %}
+                    selected
+                {% endif %}
+            >
+                {{ cat.name }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
 <h1 class="page-title">All Products</h1>
 
 {% if products %}
@@ -73,7 +89,7 @@ function addToCart(productId) {
     })
     .then(res => res.json())
     .then(data => {
-        document.getElementById("cart-count").innerText = data.cart_count;
+        document.getElementById("cart-count").innerText = data.count ;
     });
 }
 </script>

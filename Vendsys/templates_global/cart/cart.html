@@ -74,7 +74,7 @@ function increaseQty(productId) {
         document.getElementById(`qty-${productId}`).innerText = data.quantity;
         document.getElementById(`item-total-${productId}`).innerText = data.item_total;
         document.getElementById(`cart-total`).innerText = data.cart_total;
-        
+        document.getElementById("cart-count").innerText = data.count ;
         
     });
 }
@@ -96,6 +96,7 @@ function decreaseQty(productId) {
             document.getElementById(`item-total-${productId}`).innerText = data.item_total;
         }
         document.getElementById(`cart-total`).innerText = data.cart_total;
+        document.getElementById("cart-count").innerText = data.count ;
     });
 }
 </script>

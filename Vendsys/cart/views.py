@@ -12,15 +12,15 @@ def add_to_cart(request, product_id):
     else:
         cart[str(product_id)] = {"quantity": 1} #add 
 
-    request.session["cart"] = cart  # Save   
-
+    request.session["cart"] = cart  # Save  
+ 
     count = sum(item["quantity"] for item in cart.values())
 
     return JsonResponse({
         "success" : True,
         "message" : "Product added",
-        "quantity" : cart[str(product_id)]["quantity"]
-    
+        "quantity" : cart[str(product_id)]["quantity"],
+        "count" : count,
     })  
 
     
@@ -34,6 +34,8 @@ def decrease_quantity(request, product_id):
             del cart[str(product_id)]
             request.session["cart"] = cart
 
+            count = sum(item["quantity"] for item in cart.values())
+
             total = 0
             for pid, item in cart.items():
                 product = Product.objects.get(id=pid)
@@ -41,7 +43,8 @@ def decrease_quantity(request, product_id):
 
             return JsonResponse({
                 "removed": True,
-                "cart_total": total
+                "cart_total": total,
+                "count" : count
             })
 
     product = Product.objects.get(id=product_id)
@@ -63,6 +66,7 @@ def decrease_quantity(request, product_id):
         "removed" : False,
         "item_total": item_total,
         "cart_total": total,
+        "count" : count
 })
 
 
@@ -86,10 +90,13 @@ def increase_quantity(request, product_id):
         p = Product.objects.get(id=pid)
         total += p.price * item["quantity"]
 
+    count = sum(item["quantity"] for item in cart.values())
+
     return JsonResponse({
         "quantity": quantity,
         "item_total": item_total,
         "cart_total": total,
+        "count" : count,
 
     })
   
