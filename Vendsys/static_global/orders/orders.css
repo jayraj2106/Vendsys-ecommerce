@@ -21,7 +21,6 @@
     border-radius: 10px;
     text-decoration: none;
     color: black;
-    overflow: hidden;
 }
 
 .items-images {
@@ -31,8 +30,8 @@
 }
 
 .img-box {
-    min-width: 70px;
-    height: 70px;
+    min-width: 80px;
+    height: 80px;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid #ccc;;
@@ -43,4 +42,18 @@
     height: 80px;
     object-fit: cover;
     margin: 0%;
+}
+
+.more-box {
+    width: 80px;
+    height: 80px;
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eee;
+    border-radius: 6px;
+    font-weight: bold;
 }

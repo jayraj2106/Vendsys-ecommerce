@@ -1,4 +1,15 @@
-    .order-detail-container {
+.order-item{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.total{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+.order-detail-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,3 +49,4 @@
     height: 0.5px;
     background-color: rgb(61, 61, 61);
 }
+

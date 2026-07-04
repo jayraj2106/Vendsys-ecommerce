@@ -13,13 +13,19 @@
             <h1 class="heading">Your Orders</h1>
             {% for order in orders %}
                 <a href="{% url 'order_detail' order.id %}" class="orders-list">
-                    <p>Order ID :{{ order.id }} || Ordered At :{{ order.created_at }}</p>
+                    <p style="margin-bottom: 0px;">Order ID :{{ order.id }} || Ordered At :{{ order.created_at }}</p>
+                    <p style="margin-top: 2px;">Address: {{ order.address }}</p>
                      <div class="items-images">
-                        {% for item in order.orderitem_set.all %}
+                        {% for item in order.orderitem_set.all|slice:":3" %}
                             <div class="img-box">
                             <img src="{{ item.product.image.url }}" alt="">
                             </div>
                         {% endfor %}
+                        {% if order.orderitem_set.count > 3 %}
+                            <div class="more-box">
+                            +{{ order.orderitem_set.count|add:"-3" }}
+                            </div>
+                        {% endif %}
                     </div>
                     <p> Status :{{ order.status }}  ||  Total Price: ₹ {{ order.total_price }} </p>
                 </a>

@@ -25,7 +25,7 @@ def place_order(request):
         user=request.user,
         total_price = total_price,
         status = 'pending',
-       
+        address = request.POST.get('address')
     )
 
     for product_id, item in cart.items():

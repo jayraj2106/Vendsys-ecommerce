@@ -48,6 +48,8 @@ Cart
 
    <form method="POST" action="{% url 'place_order' %}" onsubmit="disableBtn(this)" class="place-order">
     {% csrf_token %}
+
+    <textarea name="address" placeholder="Enter your address" required></textarea>
     <button type="submit">Order</button>
    </form>
 

@@ -87,6 +87,7 @@
 
 .place-order{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -96,6 +97,7 @@
     color: black;
     border-radius: 10px;
     font-size: 20px;
+    margin-top: 10px;
 }
 .place-order:hover {
     transform: translateY(-2px);
