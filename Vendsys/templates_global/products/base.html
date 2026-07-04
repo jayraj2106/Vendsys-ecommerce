@@ -13,9 +13,9 @@
     <a class="logo">Vendsys</a>
 
     <div class="nav-links">
-        <a href="/products/">Home</a>
-        <a href="/products/">Products</a>
-        <a href="/cart/">Cart
+        <a href="{% url 'product_list' %}">Home</a>
+        <!-- <a href="/products/">Products</a> -->
+        <a href="{% url 'cart_view' %}">Cart
         <span id="cart-count">{% if cart_count > 0 %}{{ cart_count }}{% endif %}</span>
         </a>
     {% if user.is_authenticated %}

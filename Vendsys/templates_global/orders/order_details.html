@@ -1,0 +1,31 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'orders/order_details.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="order-detail-container">
+    <h1>Order Details</h1>
+    <div class="order-details">
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Ordered At:</strong> {{ order.created_at }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <hr id="devider">
+        <hr id="devider">
+        <h2>Items in this Order:</h2>
+        {% for item in items %}
+            <div class="order-item">
+                <p>{{ item.product.name }} * {{ item.quantity }}</p>
+                <p>Price: ₹ {{ item.price|floatformat:2 }}</p>
+                
+            </div>
+            <hr id="product-devider">
+        {% endfor %}
+        <hr id="devider">
+        <p><strong>Total Price:</strong> ₹ {{ order.total_price }}</p>
+
+    </div>
+</div>
+{% endblock %}

@@ -9,7 +9,7 @@ Cart
 <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
 
 {% endblock %}
-{% block content %}gi
+{% block content %}
 {% if cart_items %}
     <h1 class="page-title">Your Cart</h1>
     <div class="cart-container">
@@ -46,10 +46,11 @@ Cart
     Cart Total: ₹ <span id="cart-total">{{ total|floatformat:2 }}</span>
     </h2>
 
-    <form action="{% url 'place_order' %}" method="POST" class="place-order">
+   <form method="POST" action="{% url 'place_order' %}" onsubmit="disableBtn(this)" class="place-order">
     {% csrf_token %}
     <button type="submit">Order</button>
-    </form>
+   </form>
+
 
 {% else %}
     <h2 style="text-align:center;">Your cart is empty.</h2>
@@ -105,6 +106,13 @@ function decreaseQty(productId) {
         document.getElementById(`cart-total`).innerText = data.cart_total;
         document.getElementById("cart-count").innerText = data.count ;
     });
+}
+
+
+function disableBtn(form) {
+    const btn = form.querySelector("button");
+    btn.disabled = true;
+    btn.innerText = "Placing...";
 }
 </script>
 {% endblock %}
