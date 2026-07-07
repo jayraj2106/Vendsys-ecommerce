@@ -27,5 +27,8 @@
         <p class="total"><strong>Total Price:</strong> ₹ {{ order.total_price }}</p>
 
     </div>
+    <div class="back-button">
+        <a href="{% url 'orders' %}">Back to Orders</a>
+    </div>
 </div>
 {% endblock %}

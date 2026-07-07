@@ -5,4 +5,4 @@ def cart_count(request):
     count = sum(item["quantity"] for item in cart.values())
     return {"cart_count": count}
 
-    
+

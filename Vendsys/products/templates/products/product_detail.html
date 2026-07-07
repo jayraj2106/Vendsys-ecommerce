@@ -1,13 +1,27 @@
-<DOCTYPE html>
-<html>
-<head>
-    <title>{{ product.name }}</title>
-</head>
-<body>
+{% extends 'products/base.html' %}
+{% load static %}
 
-<h1>{{ product.name }}</h1>
-<p>Price: {{ product.price }}</p>
-<p>{{ product.description }}</p>
+{% block title %}
+{{ product.name }}
+{% endblock %}
 
-</body>
-</html>
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'products/product_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ product.name }}</h1>
+    <div class="product-detail">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="product-info">
+            <p>{{ product.description }}</p>
+            <p>Price: ₹ {{ product.price }}</p>
+        </div>
+    </div>
+    <div class="back-button">
+        <a href="{% url 'product_list' %}">Back to Products</a>
+    </div>
+</div>
+
+{% endblock %}

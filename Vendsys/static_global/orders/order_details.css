@@ -50,3 +50,21 @@
     background-color: rgb(61, 61, 61);
 }
 
+.back-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+}
+.back-button:hover{ 
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+.back-button a {
+    text-decoration: none;
+}
+

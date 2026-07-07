@@ -1,6 +1,36 @@
 from django.shortcuts import redirect, render
 from products.models import Product
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+def get_cart_products(cart):
+    product_ids = list(cart.keys())  # get all ids
+
+    products = Product.objects.filter(id__in=product_ids)
+
+    product_map = {}
+
+    for product in products:
+        product_map[str(product.id)] = product
+
+    return product_map
+
+def calculate_cart(cart, product_map):
+    total = 0
+    count = 0
+
+    for pid in cart:
+        quantity = cart[pid]["quantity"]
+        product = product_map.get(pid)
+
+        if product:
+            total += product.price * quantity
+            count += quantity
+
+    return total, count
+
 
 
 def add_to_cart(request, product_id):
@@ -127,3 +157,14 @@ def cart_view(request):
 
     })
 
+#fot calculating total and count of cart items
+def calculate_cart(cart):
+    total = 0
+    count = 0
+
+    for pid, item in cart.items():
+        product = Product.objects.get(id=pid)
+        total += product.price * item["quantity"]
+        count += item["quantity"]
+
+    return total, count
