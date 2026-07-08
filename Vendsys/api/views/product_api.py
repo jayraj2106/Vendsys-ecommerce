@@ -1,8 +1,6 @@
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
 from products.models import Product
-from products.serializers import ProductSerializer
+from api.serializers.product_serializers import ProductSerializer
 from rest_framework.viewsets import ModelViewSet
 
 
@@ -18,8 +16,8 @@ from rest_framework.viewsets import ModelViewSet
 #     serializer = ProductSerializer(product)
 #     return Response(serializer.data)  
 
-class ProductViewSet(ModelViewSet):
+class ProductViewSet(ModelViewSet): 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    http_method_names = ['get'] 
+    http_method_names = ['get'] #can add post for upload a product
 

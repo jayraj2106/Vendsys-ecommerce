@@ -1,6 +1,7 @@
 from django.urls import path
 from api.views.product_api import ProductViewSet
 from rest_framework.routers import DefaultRouter
+from api.views.order_api import OrderViewSet
 from api.views.cart_api import (
     add_to_cart_api,
     cart_view_api, 
@@ -10,7 +11,8 @@ from api.views.cart_api import (
                               
 
 router = DefaultRouter()
-router.register(r'products', ProductViewSet, basename='product')
+router.register('products', ProductViewSet, basename='product')
+router.register('orders', OrderViewSet, basename='orders')
 
 
 urlpatterns = [
