@@ -3,16 +3,23 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from products.models import Product
 from products.serializers import ProductSerializer
+from rest_framework.viewsets import ModelViewSet
 
 
-@api_view(['GET'])
-def product_list_api(request):
-    products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)  
+# @api_view(['GET'])
+# def product_list_api(request):
+#     products = Product.objects.all()
+#     serializer = ProductSerializer(products, many=True)
+#     return Response(serializer.data)  
 
-@api_view(['GET'])
-def product_detail_api(request, id):
-    product = get_object_or_404(Product, id=id)
-    serializer = ProductSerializer(product)
-    return Response(serializer.data)  
+# @api_view(['GET'])
+# def product_detail_api(request, id):
+#     product = get_object_or_404(Product, id=id)
+#     serializer = ProductSerializer(product)
+#     return Response(serializer.data)  
+
+class ProductViewSet(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    http_method_names = ['get'] 
+

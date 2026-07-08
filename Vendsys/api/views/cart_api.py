@@ -18,8 +18,8 @@ def calculate_cart(cart, product_map):
     total = 0
     count = 0
 
-    for pid in cart:
-        quantity = cart[pid]["quantity"]
+    for pid, item in cart.items():
+        quantity = item["quantity"]
         product = product_map.get(pid)
 
         if product:
@@ -76,6 +76,7 @@ def add_to_cart_api(request, product_id):
         "success": True,
         "quantity": cart[str(product_id)]["quantity"],
         "count": count,
+        "cart_total": total
     })
 
 
@@ -95,6 +96,7 @@ def increase_quantity_api(request, product_id):
     cart[str(product_id)]["quantity"] += 1
     request.session["cart"] = cart
     
+    product_map = get_cart_products(cart)
 
     quantity = cart[str(product_id)]["quantity"]
     item_total = product.price * quantity
@@ -149,6 +151,8 @@ def decrease_quantity_api(request, product_id):
     total, count = calculate_cart(cart, product_map)
 
     request.session["cart"] = cart
+
+    product_map = get_cart_products(cart)
 
     return Response({
         "quantity" : cart[str(product_id)]["quantity"],

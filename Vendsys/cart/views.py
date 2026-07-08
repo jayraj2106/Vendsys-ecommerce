@@ -5,34 +5,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
-def get_cart_products(cart):
-    product_ids = list(cart.keys())  # get all ids
-
-    products = Product.objects.filter(id__in=product_ids)
-
-    product_map = {}
-
-    for product in products:
-        product_map[str(product.id)] = product
-
-    return product_map
-
-def calculate_cart(cart, product_map):
-    total = 0
-    count = 0
-
-    for pid in cart:
-        quantity = cart[pid]["quantity"]
-        product = product_map.get(pid)
-
-        if product:
-            total += product.price * quantity
-            count += quantity
-
-    return total, count
-
-
-
 def add_to_cart(request, product_id):
     cart = request.session.get('cart', {})
     
@@ -43,12 +15,13 @@ def add_to_cart(request, product_id):
 
     request.session["cart"] = cart  # Save  
  
-    count = sum(item["quantity"] for item in cart.values())
+    total, count = calculate_cart(cart)
 
     return JsonResponse({
         "success" : True,
         "quantity" : cart[str(product_id)]["quantity"],
         "count" : count,
+        "cart_total": total
     })  
 
     
@@ -62,12 +35,7 @@ def decrease_quantity(request, product_id):
             del cart[str(product_id)]
             request.session["cart"] = cart
 
-            count = sum(item["quantity"] for item in cart.values())
-
-            total = 0
-            for pid, item in cart.items():
-                product = Product.objects.get(id=pid)
-                total += product.price * item["quantity"]
+            total, count = calculate_cart(cart)
 
             return JsonResponse({
                 "removed": True,
@@ -80,14 +48,9 @@ def decrease_quantity(request, product_id):
     item_total = product.price * quantity
 
     # Calculate cart total
-    total = 0
-    for pid, item in cart.items():
-        p = Product.objects.get(id=pid)
-        total += p.price * item["quantity"]
+    total, count = calculate_cart(cart)
 
     request.session["cart"] = cart
-
-    count = sum(item["quantity"] for item in cart.values())
 
     return JsonResponse({
         "quantity" : cart[str(product_id)]["quantity"],
@@ -113,12 +76,8 @@ def increase_quantity(request, product_id):
     item_total = product.price * quantity
 
     # cart total
-    total = 0
-    for pid, item in cart.items():
-        p = Product.objects.get(id=pid)
-        total += p.price * item["quantity"]
+    total, count = calculate_cart(cart)
 
-    count = sum(item["quantity"] for item in cart.values())
 
     return JsonResponse({
         "quantity": quantity,
