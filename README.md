@@ -1,27 +1,27 @@
-# E-Commerce Backend API (Django + DRF)
+# 🛒 E-commerce Web Application
 
-This project is a backend implementation of a basic e-commerce system built using Django and Django REST Framework. It includes core features like product management, cart handling, and order processing, designed with clean structure and efficient database usage.
-
----
-
-## Features
-
-- Product list and detail APIs
-- Cart system with add/update functionality
-- Order creation from cart
-- User-specific order history
-- Separate order list and order detail APIs
-- Nested serializers for order items
-- Optimized queries using `prefetch_related`
+A full-stack Django e-commerce application with server-rendered UI and dynamic cart functionality using JSON responses.
 
 ---
 
-## Tech Stack
+## 🚀 Features
+
+- User authentication (Login/Register)
+- Product listing and detail pages
+- Add to cart (dynamic, JSON-based)
+- Update/remove items from cart
+- Order placement system
+- Server-rendered HTML pages (Django templates)
+
+---
+
+## 🛠 Tech Stack
 
 - Python
 - Django
-- Django REST Framework
-- SQLite
+- HTML, CSS (Django Templates)
+- JavaScript (AJAX for cart)
+- SQLite / PostgreSQL
 
 ---
 
