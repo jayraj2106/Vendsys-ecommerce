@@ -47,9 +47,9 @@ def place_order(request):
 @login_required
 def order_list(request):
     orders = Order.objects.filter(user=request.user).order_by('-id')
-
+   
     return render(request, "orders/orders.html", {
-        "orders": orders
+        "orders": orders,
     })
 
 
@@ -57,7 +57,7 @@ def order_list(request):
 def order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
 
-    items = order.orderitem_set.all()
+    items = order.items.select_related("product")
 
     return render(request, "orders/order_details.html", {
         "order": order,

@@ -16,14 +16,14 @@
                     <p style="margin-bottom: 0px;">Order ID :{{ order.id }} || Ordered At :{{ order.created_at }}</p>
                     <p style="margin-top: 2px;">Address: {{ order.address }}</p>
                      <div class="items-images">
-                        {% for item in order.orderitem_set.all|slice:":3" %}
+                        {% for item in order.items.all|slice:":3" %}
                             <div class="img-box">
                             <img src="{{ item.product.image.url }}" alt="">
                             </div>
                         {% endfor %}
-                        {% if order.orderitem_set.count > 3 %}
+                        {% if order.items.all.count > 3 %}
                             <div class="more-box">
-                            +{{ order.orderitem_set.count|add:"-3" }}
+                            +{{ order.items.all.count|add:"-3" }}
                             </div>
                         {% endif %}
                     </div>
