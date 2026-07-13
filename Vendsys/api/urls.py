@@ -8,7 +8,11 @@ from api.views.cart_api import (
     increase_quantity_api, 
     decrease_quantity_api
     )                             
-                              
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+)
+from api.views.account_api import RegisterView,LoginView
+                     
 
 router = DefaultRouter()
 router.register('products', ProductViewSet, basename='product')
@@ -20,6 +24,9 @@ urlpatterns = [
     path('cart/add/<int:product_id>/', add_to_cart_api, name='add_to_cart_api'),
     path('cart/increase/<int:product_id>/', increase_quantity_api, name='increase_quantity_api'),
     path('cart/decrease/<int:product_id>/', decrease_quantity_api, name='decrease_quantity_api'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
 ]
 
 #products urls
