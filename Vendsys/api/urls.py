@@ -18,6 +18,7 @@ router = DefaultRouter()
 router.register('products', ProductViewSet, basename='product')
 router.register('orders', OrderViewSet, basename='orders')
 
+app_name = 'api'
 
 urlpatterns = [
     path('cart/', cart_view_api, name='cart_view_api'),
@@ -25,8 +26,8 @@ urlpatterns = [
     path('cart/increase/<int:product_id>/', increase_quantity_api, name='increase_quantity_api'),
     path('cart/decrease/<int:product_id>/', decrease_quantity_api, name='decrease_quantity_api'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain'),
-    path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(), name='login'),
+    path('register/', RegisterView.as_view(), name='api_register'),
+    path('login/', LoginView.as_view(), name='api_login'),
 ]
 
 #products urls
