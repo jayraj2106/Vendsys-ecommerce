@@ -48,6 +48,7 @@ def cart_view_api(request):
         cart_data.append({
             "id": product.id,
             "name": product.name,
+            "stock" : product.stock,
             "price": product.price,
             "quantity": quantity,
             "total": product.price * quantity

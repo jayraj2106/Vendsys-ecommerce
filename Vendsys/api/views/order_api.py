@@ -11,6 +11,8 @@ from decimal import Decimal
 from rest_framework.exceptions import ValidationError
 from django.db import transaction 
 
+
+
 class OrderViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -27,7 +29,7 @@ class OrderViewSet(ModelViewSet):
         return OrderDetailSerializer 
     
 
-    @transaction.atomic  #prevent halft created order if error 
+    @transaction.atomic  #prevent half created order if error 
     def perform_create(self, serializer):
         request = self.request
         user = request.user
@@ -48,6 +50,12 @@ class OrderViewSet(ModelViewSet):
 
             price = product.price * quantity
 
+            if quantity > product.stock:
+                raise ValidationError(f"{product.name} is out of stock")
+
+            product.stock -= quantity
+            product.save()
+
             OrderItem.objects.create(
                 order=order,
                 product=product,
@@ -60,7 +68,7 @@ class OrderViewSet(ModelViewSet):
         
         order.total_price = total_price
         order.save()
-         
+
         request.session['cart'] = {}
 
 

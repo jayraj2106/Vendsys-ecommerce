@@ -13,4 +13,5 @@ class ProductFilterSerializer(serializers.Serializer):
 
     #pagination
     page = serializers.IntegerField(required=False, min_value=1, default=1)
-    page_size = serializers.IntegerField(required=False, min_value=1, max_value=50, default=10)
+    page_size = serializers.IntegerField(required=False, min_value=1, max_value=50, default=5)
+    

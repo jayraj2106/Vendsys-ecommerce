@@ -9,7 +9,7 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()     
     serializer_class = ProductSerializer
     http_method_names = ['get'] 
-    #can add post for upload a product
+
 
     filter_backends = [filters.SearchFilter,filters.OrderingFilter]
     search_fields = ['name', 'description']
@@ -60,5 +60,5 @@ class ProductViewSet(ModelViewSet):
             "page_size": page_size,
             "total_items": total_items,
             "total_pages": (total_items + page_size - 1) // page_size,
-            "results": serializer.data
+            "results": serializer.data,
         })
