@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'orders',
     'api',
     'rest_framework',
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +161,6 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+STRIPE_SECRET_KEY = "your_secret_key"
+STRIPE_PUBLIC_KEY = "your_public_key"
