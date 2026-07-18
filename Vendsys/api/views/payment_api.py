@@ -6,6 +6,11 @@ from django.shortcuts import get_object_or_404
 from orders.models import Order
 from payments.models import Payment
 
+import stripe
+from django.conf import settings
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class CreatePaymentAPIview(APIView):
 
@@ -41,9 +46,44 @@ class CreatePaymentAPIview(APIView):
             )
         
         payment = Payment.objects.create(
+            user=request.user,
             order=order,
             amount=order.total_price, 
             currency="INR",  
             status="PENDING"
         )
         
+
+        # create stripe checkout session
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            mode="payment",
+            line_items=[
+                {
+                    "price_data": {
+                        "product_data": {
+                            "name": f"Order #{order.id}",
+                        },
+                        "unit_amount": int(payment.amount * 100),
+                    },
+                    "quantity": 1,
+                }
+            ],
+            success_url="http://localhost:3000/success",
+            cancel_url="http://localhost:3000/cancel",
+        )
+
+
+        # save stripe data in payment
+        payment.stripe_session_id = checkout_session.id
+        payment.stripe_payment_intent = checkout_session.payment_intent
+        payment.save()
+
+
+        # return response
+        return Response(
+            {
+                "checkout_url": checkout_session.url
+            },
+            status=status.HTTP_200_OK
+        )

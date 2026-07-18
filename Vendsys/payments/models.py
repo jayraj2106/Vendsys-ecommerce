@@ -12,11 +12,12 @@ class Payment(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="payments")
 
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     stripe_session_id = models.CharField(max_length=255, blank=True, null=True)
+    stripe_payment_intent = models.CharField(max_length=255, blank=True, null=True)
 
     status = models.CharField(
         max_length=10,
