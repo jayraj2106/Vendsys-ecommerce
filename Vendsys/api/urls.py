@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from api.views.product_api import ProductViewSet
 from rest_framework.routers import DefaultRouter
 from api.views.order_api import OrderViewSet
@@ -25,9 +25,13 @@ urlpatterns = [
     path('cart/add/<int:product_id>/', add_to_cart_api, name='add_to_cart_api'),
     path('cart/increase/<int:product_id>/', increase_quantity_api, name='increase_quantity_api'),
     path('cart/decrease/<int:product_id>/', decrease_quantity_api, name='decrease_quantity_api'),
+
     path('token/', TokenObtainPairView.as_view(), name='token_obtain'),
+
     path('register/', RegisterView.as_view(), name='api_register'),
     path('login/', LoginView.as_view(), name='api_login'),
+
+    path("payments/", include("payments.urls")),
 ]
 
 #products urls

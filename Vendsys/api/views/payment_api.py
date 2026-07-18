@@ -1,10 +1,14 @@
 from api.serializers.payment_serializer import CreatePaymentSerializer
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from orders.models import Order
 from payments.models import Payment
+
+from django.utils import timezone
+from datetime import timedelta
 
 import stripe
 from django.conf import settings
@@ -36,7 +40,8 @@ class CreatePaymentAPIview(APIView):
         
         existing_payment = Payment.objects.filter(
             order=order,
-            status="PENDING"
+            status="PENDING",
+            created_at__gte=timezone.now() - timedelta(minutes=10)
         ).first()
 
         if existing_payment:
@@ -48,8 +53,7 @@ class CreatePaymentAPIview(APIView):
         payment = Payment.objects.create(
             user=request.user,
             order=order,
-            amount=order.total_price, 
-            currency="INR",  
+            amount=order.total_price,  
             status="PENDING"
         )
         
@@ -61,6 +65,7 @@ class CreatePaymentAPIview(APIView):
             line_items=[
                 {
                     "price_data": {
+                        "currency": "inr",
                         "product_data": {
                             "name": f"Order #{order.id}",
                         },
@@ -69,8 +74,8 @@ class CreatePaymentAPIview(APIView):
                     "quantity": 1,
                 }
             ],
-            success_url="http://localhost:3000/success",
-            cancel_url="http://localhost:3000/cancel",
+            success_url="http://127.0.0.1:8000/api/payments/payment-success/",
+            cancel_url="http://127.0.0.1:8000/api/payments/payment-cancle/",
         )
 
 
@@ -87,3 +92,19 @@ class CreatePaymentAPIview(APIView):
             },
             status=status.HTTP_200_OK
         )
+    
+
+
+@api_view(["GET"])
+def payment_success(request):
+    return Response({
+        "status": "success",
+        "message": "Payment completed",
+    })
+
+@api_view(["GET"])
+def payment_cancle(request):
+    return Response({
+        "status": "cancle",
+        "message": "Payment incompleted",
+    })
