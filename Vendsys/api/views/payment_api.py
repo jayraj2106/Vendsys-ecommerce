@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from orders.models import Order
+from payments.models import Payment
 
 
 class CreatePaymentAPIview(APIView):
@@ -27,5 +28,22 @@ class CreatePaymentAPIview(APIView):
                 {"error": "Order is already paid or not eligible for payment"},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+        existing_payment = Payment.objects.filter(
+            order=order,
+            status="PENDING"
+        ).first()
 
+        if existing_payment:
+            return Response(
+                {"error": "A payment is already in progress for this order"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        payment = Payment.objects.create(
+            order=order,
+            amount=order.total_price, 
+            currency="INR",  
+            status="PENDING"
+        )
         
