@@ -23,3 +23,6 @@ env/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Ignore static build files
+staticfiles/
