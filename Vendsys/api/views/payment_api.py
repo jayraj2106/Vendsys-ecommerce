@@ -127,7 +127,6 @@ def stripe_webhook(request):
 
         event_type = event["type"]
         
-        print("WEBHOOK HIT:", event_type)
 
         if event_type == "checkout.session.completed":
             session = event["data"]["object"]
@@ -146,9 +145,7 @@ def stripe_webhook(request):
 
             
             if payment_status == "paid":
-                payment = Payment.objects.get(stripe_session_id=stripe_session_id)
-                
-                order_id = session.metadata.get("order_id")
+                order_id = session.metadata["order_id"]
                 order = Order.objects.get(id=order_id)
 
                 payment.stripe_payment_intent = payment_intent
@@ -160,7 +157,6 @@ def stripe_webhook(request):
                 order.status = "paid"
                 order.save()
 
-        print("Payment and Order updated successfully")
 
     except ValueError:
         return JsonResponse({"error": "Invalid payload"}, status=400)
