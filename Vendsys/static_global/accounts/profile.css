@@ -96,5 +96,11 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    object-fit: cover;
+    background: #6c757d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
 }
