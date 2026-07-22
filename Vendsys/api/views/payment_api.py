@@ -80,8 +80,8 @@ class CreatePaymentAPIview(APIView):
             metadata={
                 "order_id": str(order.id),
             },
-            success_url="http://127.0.0.1:8000/api/payments/payment-success/",
-            cancel_url="http://127.0.0.1:8000/api/payments/payment-cancle/",
+            success_url="https://vendsys-ecommerce.onrender.com/api/payments/payment-success/",
+            cancel_url="https://vendsys-ecommerce.onrender.com/api/payments/payment-cancle/",
         )
 
     
