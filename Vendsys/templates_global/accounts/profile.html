@@ -16,7 +16,9 @@
                 {% if user.profile_picture %}
                     <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
                 {% else %}
-                    <img src="{% static 'accounts/avatar.jpg' %}" alt="Default Profile Picture">
+                    <div class="profile-picture-placeholder">
+                        {{ user.get_full_name|first|upper|default:user.username|first|upper }}
+                    </div>
                 {% endif %}
             </div>
         </div>
