@@ -1,27 +1,31 @@
 #  E-commerce Web Application
 
-A full-stack Django e-commerce application with server-rendered UI and dynamic cart functionality using JSON responses.
+Built a full-stack e-commerce web application using Django and Django REST Framework with features like JWT authentication, product search & filtering, dynamic cart management, order processing, and Stripe payment integration. Implemented RESTful APIs with pagination and optimized database queries for performance.
 
 ---
 
 ## Features
 
-- User authentication (Login/Register)
+- User authentication (Login/Register with JWT)
 - Product listing and detail pages
+- Product search functionality
+- Category-based product filtering
+- Pagination support (page count & item count)
 - Add to cart (dynamic, JSON-based)
 - Update/remove items from cart
 - Order placement system
+- Stripe payment integration
 - Server-rendered HTML pages (Django templates)
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Python
 - Django
 - HTML, CSS (Django Templates)
 - JavaScript (AJAX for cart)
-- SQLite / PostgreSQL
+- PostgreSQL
 
 ---
 ## Base URL
@@ -29,7 +33,7 @@ A full-stack Django e-commerce application with server-rendered UI and dynamic c
 https://vendsys-ecommerce.onrender.com
 
 
-## 📘 API Endpoints
+## API Endpoints
 
 ### Authentication
 
@@ -41,6 +45,13 @@ https://vendsys-ecommerce.onrender.com
 ### Products
 
 - `GET /products/` — List all products
+    - Supports:
+    - `?search=<query>` — Search products
+    - `?category=<category_name>` — Filter by category
+    - `?min_price=<value>` — Filter products with price ≥ value  
+    - `?max_price=<value>` — Filter products with price ≤ value  
+    - `?page=<number>` — Pagination page
+    - `?page_size=<count>` — Items per page
 
 ---
 
