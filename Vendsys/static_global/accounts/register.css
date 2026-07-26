@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding: 7px;
     max-width: 500px;
 
     min-height: 100vh;
@@ -28,7 +29,6 @@
 /* Form box */
 .register-container form {
     background: white;
-    padding: 30px;
     border-radius: 10px;
     width: 100%;
     max-width: 400px;
