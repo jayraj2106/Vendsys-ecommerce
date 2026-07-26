@@ -11,7 +11,7 @@
 .orders-list{
     margin-top: 20px;
     width: 100%;
-    max-width: 550px;
+    max-width: 600px;
     height: 100%;
     display: flex;
     flex-direction: column;
