@@ -1,7 +1,3 @@
-body {
-    margin: 0;
-}
-
 .order-item{
     display: flex;
     justify-content: space-between;
@@ -20,7 +16,7 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding: 5px;
+    max-width: 500px;
 }
 
 .order-details{

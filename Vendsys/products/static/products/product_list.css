@@ -30,6 +30,7 @@
     text-align: center;
     transition: 0.3s;
     cursor: pointer;
+    max-width: 220px;
 }
 
 /* Hover effect */

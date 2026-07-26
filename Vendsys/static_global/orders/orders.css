@@ -1,7 +1,3 @@
-body {
-    margin: 0;
-}
-
 .orders-container {
     width: 100%;
     height: 100%;
@@ -9,13 +5,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5px;
     
 }
 
 .orders-list{
     margin-top: 20px;
     width: 100%;
+    max-width: 550px;
     height: 100%;
     display: flex;
     flex-direction: column;
