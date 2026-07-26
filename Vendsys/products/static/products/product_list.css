@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 /* Title */
 .page-title {
     text-align: center;
@@ -8,13 +12,16 @@
 .product-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
 }
 
 /* Card */
 .product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     background: #fff;
     border-radius: 10px;
@@ -33,19 +40,19 @@
 /* Image */
 .product-card img {
     width: 100%;
-    height: 170px;
+    height: 140px;
     object-fit: cover;
 }
 
 /* Content */
 .product-info {
-    padding: 10px;
+    padding: 8px 6px;
 }
 
 /* Name */
 .product-name {
-    font-size: 16px;
-    margin: 10px 0;
+    font-size: 14px;
+    margin: 6px 0;
 }
 
 /* Price */
@@ -56,6 +63,6 @@
 
 /* Description */
 .product-desc {
-    font-size: 14px;
+    font-size: 12px;
     color: gray;
 }
