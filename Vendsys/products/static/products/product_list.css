@@ -66,3 +66,21 @@
     font-size: 12px;
     color: gray;
 }
+
+.product-card button {
+    margin-top: 8px;
+    padding: 7px;
+    width: 100%;
+
+    background: #2874f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.product-card button:hover {
+    background: #1f5fd1;
+}
