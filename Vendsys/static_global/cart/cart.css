@@ -13,6 +13,10 @@
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+
+    max-width: 1000px;
+    max-width: 1000px;
+    justify-content: center;
 }
 
 /* Card */
