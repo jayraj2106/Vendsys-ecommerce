@@ -11,7 +11,7 @@
 /* Grid layout */
 .product-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 220px));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 10px;
     width: 100%;
     padding: 10px;

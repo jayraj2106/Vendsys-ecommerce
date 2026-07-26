@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 }
 
 .back-button{
@@ -23,8 +24,8 @@
     text-decoration: none;
 }
 .product-detail{
-    width: 400px;
-    height: 550px;
+    width: 100%;
+    height: 100%;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -40,6 +41,6 @@
 
 .product-detail img {
     width: 100%;
-    height: 450px;
+    height: 100%;
     object-fit: cover;
 }
