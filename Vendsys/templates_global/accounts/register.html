@@ -6,14 +6,16 @@
 {% endblock %}
 
 {% block content %}
-<div class ="register-container">
-    <h2>Register</h2>
+<div class="main-container">
+    <div class ="register-container">
+        <h2>Register</h2>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Signup</button>
-        <p>Already have an account? <a href="{% url 'accounts:login' %}">Login here</a></p>
-    </form>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Signup</button>
+            <p>Already have an account? <a href="{% url 'accounts:login' %}">Login here</a></p>
+        </form>
+    </div>
 </div>
 {% endblock %} 
