@@ -43,7 +43,7 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS")
 if ALLOWED_HOSTS:
     ALLOWED_HOSTS = ALLOWED_HOSTS.split(",")
 else:
-    ALLOWED_HOSTS = ["localhost"]
+    ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 
 # Application definition
 
