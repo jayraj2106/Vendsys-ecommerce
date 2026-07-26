@@ -1,3 +1,4 @@
+
 /* Title */
 .page-title {
     text-align: center;
@@ -6,10 +7,12 @@
 
 /* Grid layout */
 .cart-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 /* Card */
@@ -73,19 +76,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
-    margin-top: 10px;
-    font-size: 20px;
     background-color: darkgrey;
-    height: 30px;
+    gap: 10px;
+    margin-top: 8px;
 }
 
 .quantity-control a{
-    text-decoration: none;
+    display: inline-block;
+    padding: 4px 10px;
+
+    background: #2874f0;
+    color: white;
+    border-radius: 4px;
+
+    font-weight: bold;
 }
 
 .quantity-control p{
-    padding:0 10px 0 10px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .place-order{
@@ -95,14 +105,19 @@
     align-items: center;
 }
 
-.place-order button{
-    background-color: aqua;
-    color: black;
-    border-radius: 10px;
-    font-size: 20px;
-    margin-top: 10px;
+.place-order button {
+    background: #8ecffa;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    padding: 10px 20px;
+    font-size: 16px;
+
+    cursor: pointer;
 }
-.place-order:hover {
-    transform: translateY(-2px);
-    
+
+.place-order button:hover {
+    background: #8ed2ff;
 }
