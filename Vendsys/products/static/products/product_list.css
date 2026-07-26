@@ -11,10 +11,11 @@
 /* Grid layout */
 .product-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 220px));
     gap: 10px;
     width: 100%;
     padding: 10px;
+    justify-content: center;
 }
 
 /* Card */
