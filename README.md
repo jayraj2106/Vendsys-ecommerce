@@ -1,4 +1,6 @@
-# Vendsys — Scalable E-commerce Backend (Django + DRF)
+# Vendsys — Production-Style E-commerce Backend (Django + DRF + Stripe)
+
+Backend-focused Django system with real payment workflow, authentication, and scalable API design.
 
 A production-oriented e-commerce backend built with **Django** and **Django REST Framework**, focused on real-world system design rather than basic CRUD.
 
