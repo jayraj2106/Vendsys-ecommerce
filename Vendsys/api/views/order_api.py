@@ -1,3 +1,4 @@
+from django.db.models import Prefetch
 from products.models import Product
 from orders.models import Order,OrderItem
 from rest_framework.viewsets import ModelViewSet
@@ -18,8 +19,13 @@ class OrderViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user) \
-            .prefetch_related('items__product') \
-            .order_by('-created_at')
+        .prefetch_related(
+            Prefetch(
+                'items',
+                queryset=OrderItem.objects.select_related('product')
+            )
+        ) \
+        .order_by('-created_at')
 
     def get_serializer_class(self):
         if self.action == 'list':
