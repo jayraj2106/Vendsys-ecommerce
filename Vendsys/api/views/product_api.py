@@ -17,7 +17,7 @@ class ProductViewSet(ModelViewSet):
 
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().select_related('category')
 
         filter_serializer = ProductFilterSerializer(data=self.request.GET)
         filter_serializer.is_valid(raise_exception=True)
